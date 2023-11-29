@@ -10,7 +10,7 @@ use Doctrine\Persistence\ObjectManager;
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
 
-    public const SERIE = [
+    public const PROGRAMS = [
         ['title' => 'One Piece', 'synopsis' => 'Des débiles sillonnent la mer', 'category' => 'category_Aventure'],
         ['title' => 'One Piece', 'synopsis' => 'Des débiles sillonnent la mer', 'category' => 'category_Aventure'],
         ['title' => 'One Piece', 'synopsis' => 'Des débiles sillonnent la mer', 'category' => 'category_Aventure'],
@@ -19,12 +19,12 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
     ];
     public function load(ObjectManager $manager)
     {
-        foreach (self::SERIE as $programName) {
-            $program = new Program();
-            $program->setTitle($programName['title']);
-            $program->setSynopsis($programName['synopsis']);
-            $program->setCategory($this->getReference($programName['category']));
-            $manager->persist($program);
+        foreach (self::PROGRAMS as $programLine) {
+        $program = new Program();
+        $program->setTitle($programLine['Title']);
+        $program->setSynopsis($programLine['Synopsis']);
+        $program->setCategory($this->getReference($programLine['Category']));
+        $manager->persist($program);
         }
         $manager->flush();
     }
