@@ -22,8 +22,9 @@ class ProgramController extends AbstractController
 
 
   #[Route('/{id}', requirements: ['id' => '\d+'], methods: ['GET'], name: 'show')]
-  public function show(int $id)
-  {
-    return $this->render('program/show.html.twig', ['id' => $id]);
+ public function show(int $id, ProgramRepository $programRepository):Response
+{ 
+    $program = $programRepository->findOneBy(['id' => $id]);
+    return $this->render('program/show.html.twig', ['id' => $id,'program' => $program,]);
   }
 }
