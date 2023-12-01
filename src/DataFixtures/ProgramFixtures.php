@@ -16,7 +16,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         ['title' => 'One Piece', 'synopsis' => 'Des débiles sillonnent la mer', 'category' => 'category_Aventure'],
         ['title' => 'The last of us', 'synopsis' => 'Des champignons et des gens tristes', 'category' => 'category_Aventure'],
         ['title' => 'Dragon ball Z', 'synopsis' => 'Des boules de feu et des coupes de cheveux déjantés', 'category' => 'category_Aventure'],
-        ['title' => 'One Piece', 'synopsis' => 'Des débiles sillonnent la mer', 'category' => 'category_Aventure'],
+        ['title' => 'Two Piece', 'synopsis' => 'Des débiles sillonnent la mer', 'category' => 'category_Aventure'],
         ['title' => 'The witcher', 'synopsis' => 'c\'est l\'histoire d\'un blond, d\'une blonde et une brune', 'category' => 'category_Action'],
         ['title' => 'The boys', 'synopsis' => 'Des super héros, bam bam pow pow', 'category' => 'category_Action'],
         ['title' => 'Scott Pilgrim', 'synopsis' => 'Un garçon et des amourettes', 'category' => 'category_Action'],
@@ -38,6 +38,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program->setSynopsis($programLine['synopsis']);
             $program->setCategory($this->getReference($programLine['category']));
             $manager->persist($program);
+            $this->addReference('program_' . $programLine['title'], $program);
         }
         $manager->flush();
     }

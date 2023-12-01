@@ -4,16 +4,17 @@ namespace App\DataFixtures;
 
 use App\Entity\Season;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class SeasonFixtures extends Fixture
+class SeasonFixtures extends Fixture implements DependentFixtureInterface
 {
 
     public const SEASONS = [
-        ['number' => '1','year'=>'1996','description' =>'','program'=>'program_Dragon ball Z'],
-        ['number' => '2','year'=>'1997','description' =>'','program'=>'program_Dragon ball Z'],
-        ['number' => '3','year'=>'1998','description' =>'','program'=>'program_Dragon ball Z'],
-        ['number' => '4','year'=>'1999','description' =>'','program'=>'program_Dragon ball Z'],
+        ['number' => '1', 'year' => '1996', 'description' => '', 'program' => 'program_Dragon ball Z'],
+        ['number' => '2', 'year' => '1997', 'description' => '', 'program' => 'program_Dragon ball Z'],
+        ['number' => '3', 'year' => '1998', 'description' => '', 'program' => 'program_Dragon ball Z'],
+        ['number' => '4', 'year' => '1999', 'description' => '', 'program' => 'program_Dragon ball Z'],
     ];
 
     public function load(ObjectManager $manager)
@@ -23,7 +24,7 @@ class SeasonFixtures extends Fixture
             $season->setNumber($seasonShows['number']);
             $season->setYear($seasonShows['year']);
             $season->setDescription($seasonShows['description']);
-            $season->setProgram($this->getReference($seasonShows['Program']));
+            $season->setProgramId($this->getReference($seasonShows['program']));
             $manager->persist($season);
             $this->addReference('season_' . $seasonShows['number'], $season);
         }

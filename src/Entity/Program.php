@@ -29,13 +29,14 @@ class Program
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
-    #[ORM\OneToMany(mappedBy: 'program', targetEntity: Season::class)]
-    private Collection $program;
+    #[ORM\OneToMany(mappedBy: 'program_id', targetEntity: Season::class)]
+    private Collection $seasons;
 
     public function __construct()
     {
-        $this->program = new ArrayCollection();
+        $this->seasons = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -93,30 +94,31 @@ class Program
     /**
      * @return Collection<int, Season>
      */
-    public function getProgram(): Collection
+    public function getSeasons(): Collection
     {
-        return $this->program;
+        return $this->seasons;
     }
 
-    public function addProgram(Season $program): static
+    public function addSeason(Season $season): static
     {
-        if (!$this->program->contains($program)) {
-            $this->program->add($program);
-            $program->setProgram($this);
+        if (!$this->seasons->contains($season)) {
+            $this->seasons->add($season);
+            $season->setProgramId($this);
         }
 
         return $this;
     }
 
-    public function removeProgram(Season $program): static
+    public function removeSeason(Season $season): static
     {
-        if ($this->program->removeElement($program)) {
+        if ($this->seasons->removeElement($season)) {
             // set the owning side to null (unless already changed)
-            if ($program->getProgram() === $this) {
-                $program->setProgram(null);
+            if ($season->getProgramId() === $this) {
+                $season->setProgramId(null);
             }
         }
 
         return $this;
     }
+
 }
