@@ -13,17 +13,16 @@
 				{{ program.category.name }}</p>
 		</div>
 	</div>
-	{# {{ program.seasons }} #}
+
 
 	<h2>Seasons<h2>
 
-			{% for season in program.seasons %}
-				<li> <a href="{{ path('') Saison numéro
-					{{season.number}}
-				</li>
-				{{ season.number }}
+			{% for season in seasons %}
 
+				<p> {{ season.number}}</p>
+				<a href="{{ path("program_show_season", { programId: program.id, seasonId: season.id }) }}">view season's episodes</a>
 			{% endfor %}
+
 			<br>
 
 			<a href="{{ path('program_index') }}">
