@@ -9,21 +9,23 @@
 			<p>Synopsis de la série :
 				<br>{{ program.synopsis }}</p>
 			<p>Catégorie de la série :{{ category.name }}</p>
-			<p>numéro de la saison : {{season.number}}</p>
+			<p>numéro de la saison :
+				{{season.number}}</p>
 
 			{% for episode in episodes %}
-				{# <a href="{{ path("program_episode_show", { programId: program.id, seasonId: season.id, episodeId: episode.id}) }}"></a> #}
-				<p>Episode
-					{{ episode.number }}</p>
+				
+				<strong>Episode{{ episode.number }}</strong>
 				<p>{{ episode.title }}</p>
-				{{ episode.synopsis }}
+				{{ episode.synopsis }}<br>
+				<a href="{{ path("program_show_episode", { programId: program.id, seasonId: season.id, episodeId: episode.id }) }}">Voir l'épisode
+				</a>
+				<br><br>
 			{% endfor %}
-
-		</ul>
+		</div>
 	</div>
-</div>
 
 
-<a href="{{ path('program_index') }}">
-	Retour à la liste des programmes
-</a>{% endblock %}
+	<a href="{{ path('program_index') }}">
+		Retour à la liste des programmes
+	</a>
+{% endblock %}
