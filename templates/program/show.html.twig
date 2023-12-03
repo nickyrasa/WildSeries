@@ -15,12 +15,9 @@
 	</div>
 
 
-	<h2>Seasons<h2>
-
-			{% for season in seasons %}
-
-				<p> {{ season.number}}</p>
-				<a href="{{ path("program_show_season", { programId: program.id, seasonId: season.id,}) }}">view season's episodes</a>
+	{% for season in seasons %}
+		<h2> Seasons {{ season.number}} <h2>
+				<a href="{{ path("program_show_season", { programId: program.id, seasonId: season.id}) }}">view season's episodes</a>
 			{% endfor %}
 
 			<br>

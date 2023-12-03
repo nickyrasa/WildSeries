@@ -34,14 +34,14 @@ class SeasonFixtures extends Fixture implements DependentFixtureInterface
         //     $manager->flush();
         // }
         foreach (ProgramFixtures::PROGRAMS as $program) {
-            for ($i = 0; $i < 50; $i++) {
+            for ($i = 0; $i < 10; $i++) {
                 $season = new Season();
                 $season->setNumber($faker->numberBetween(1, 10));
                 $season->setYear($faker->year());
                 $season->setDescription($faker->paragraphs(3, true));
 
                 $season->setProgramId($this->getReference('program_' . $program['title']));
-                $this->addReference('program_' . $program['title'] . 'season_' . $i, $season);
+                $this->addReference('program_' . $program['title'] . '_' .  'season_' . $i, $season);
                 $manager->persist($season);
             }
             $manager->flush();
