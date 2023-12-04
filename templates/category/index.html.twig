@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Liste des catégories</h1>
+	<h1>Liste des catégories : <a href="{{ path('category_new') }}">Create new</a></h1></h1>
 
 	{% for category in categories %}
 		<div>
