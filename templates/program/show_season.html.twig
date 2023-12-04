@@ -12,15 +12,22 @@
 			<p>numéro de la saison :
 				{{season.number}}</p>
 
-			{% for episode in episodes %}
-				
-				<strong>Episode{{ episode.number }}</strong>
-				<p>{{ episode.title }}</p>
-				{{ episode.synopsis }}<br>
-				<a href="{{ path("program_show_episode", { programId: program.id, seasonId: season.id, episodeId: episode.id }) }}">Voir l'épisode
-				</a>
-				<br><br>
-			{% endfor %}
+
+			<div class="container-fluid text-center">
+				{% for episode in episodes %}
+					<div class="row">
+						<div class=".g-col-6 .g-col-md-4">
+							<p>{{ episode.title }}</p>
+							{{ episode.synopsis }}<br>
+							<a href="{{ path("program_show_episode", { programId: program.id, seasonId: season.id, episodeId: episode.id }) }}">Voir l'épisode
+							</a><br><br>
+
+							<strong>Episode{{ episode.number }}</strong>
+							
+						</div>
+					</div>
+				{% endfor %}
+			</div>
 		</div>
 	</div>
 
