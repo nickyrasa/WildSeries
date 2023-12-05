@@ -1,29 +1,16 @@
 @import "~bootstrap/scss/bootstrap";
 
-$primary: darken(#428bca, 20%);
-$danger: #f0625a, 10%;
-
 body {
-    background-color: lightgrey;
+
+    background-color: lightgray;
 }
 
-.navbar {
-    background-color: $danger;
+$primary:rgb(255, 230, 0);
+nav 
+{
+    background-color: $primary;
 }
-
-.home {
+    
+body{
     text-align: center;
-}
-
-h1 {
-    margin: 24px;
-}
-h2 {
-    margin: 16px;
-}
-
-.row>* {
-    flex-shrink: 0;
-    width: 100%;
-    max-width: 100%;
 }

@@ -37,13 +37,16 @@ class ProgramController extends AbstractController
     // Get data from HTTP request
     $form->handleRequest($request);
     // Was the form submitted ?
-    if ($form->isSubmitted()&& $form->isValid()) {
+    if ($form->isSubmitted() && $form->isValid()) {
       // Deal with the submitted data
       // For example : persiste & flush the entity
       // And redirect to a route that display the result
       $entityManager->persist($program);
       $entityManager->flush();
       // Render the form
+      $this->addFlash('success', 'The new program has been created');
+
+      return $this->redirectToRoute('index');
     }
 
     return $this->render('program/new.html.twig', [
@@ -92,5 +95,37 @@ class ProgramController extends AbstractController
       'season' => $season,
       'episode' => $episode,
     ]);
+  }
+
+  #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+  public function edit(Request $request, Program $program, EntityManagerInterface $entityManager): Response
+  {
+    $form = $this->createForm(ProgramType::class, $program);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+      $entityManager->flush();
+      $this->addFlash('success', 'The new program has been updated');
+
+      return $this->redirectToRoute('index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    return $this->render('program/edit.html.twig', [
+      'program' => $program,
+      'form' => $form,
+    ]);
+  }
+
+  #[Route('/{id}', name: 'delete', methods: ['POST'])]
+  public function delete(Request $request, Program $program, EntityManagerInterface $entityManager): Response
+  {
+    if ($this->isCsrfTokenValid('delete' . $program->getId(), $request->request->get('_token'))) {
+      $entityManager->remove($program);
+      $entityManager->flush();
+
+      $this->addFlash('danger', 'The new program has been deleted');
+    }
+
+    return $this->redirectToRoute('index', [], Response::HTTP_SEE_OTHER);
   }
 }
